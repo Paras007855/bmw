@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BMW Website - Paras Chavan</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f0f4f8;
+      color: #111;
+    }
+    html {
+      scroll-behavior: smooth;
+    }
+    header {
+      background: black;
+      color: white;
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    header h1 {
+      font-size: 24px;
+      color: #00a0ff;
+      margin: 0;
+    }
+    .logo {
+      height: 40px;
+      margin-right: 15px;
+    }
+    nav {
+      display: flex;
+      align-items: center;
+    }
+    nav a {
+      color: white;
+      margin: 0 15px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    nav a:hover {
+      color: #00a0ff;
+    }
+    .hero {
+      background: url("https://www.bmw.com/content/dam/bmw/marketBMWCOM/bmw_com/categories/Fahrfreude/brandshaper-stage-bmw-3-series.jpg") center/cover no-repeat;
+      height: 60vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+    .bmw-text {
+      background: linear-gradient(90deg, #009ADA, #0a2c7a, #e60012);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-size: 6vw;
+      font-weight: bold;
+      text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+    }
+    .models {
+      padding: 40px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+    .card {
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      transition: transform 0.3s;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+    }
+    .card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+    .card h3 {
+      margin: 10px;
+    }
+    .card p {
+      margin: 10px;
+      color: #333;
+    }
+    .fuel {
+      font-size: 14px;
+      font-weight: bold;
+      color: #e60012;
+      margin: 0 10px 15px;
+    }
+    .buy-btn {
+      display: block;
+      margin: 10px;
+      padding: 10px;
+      background: #00a0ff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+      text-align: center;
+    }
+    .buy-btn:hover {
+      background: #007acc;
+    }
+    .owner {
+      background: #111;
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+    footer {
+      background: #000;
+      color: #fff;
+      text-align: center;
+      padding: 15px;
+    }
+    footer a {
+      color: #00a0ff;
+      margin: 0 8px;
+      text-decoration: none;
+    }
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* Login Section */
+    .login {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 50px 0;
+    }
+    .login-box {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      width: 300px;
+    }
+    .login-box h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #00a0ff;
+    }
+    .login-box input {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    .login-box button {
+      width: 100%;
+      padding: 10px;
+      background: #00a0ff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .login-box button:hover {
+      background: #007acc;
+    }
+
+    /* Buy Now Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.6);
+      justify-content: center;
+      align-items: center;
+      z-index: 2000;
+    }
+    .modal-content {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      width: 350px;
+      text-align: center;
+      position: relative;
+    }
+    .modal-content h2 {
+      margin-bottom: 15px;
+      color: #00a0ff;
+    }
+    .modal-content input, .modal-content select {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    .modal-content button {
+      margin-top: 10px;
+      padding: 10px;
+      background: #00a0ff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .modal-content button:hover {
+      background: #007acc;
+    }
+    .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 18px;
+      cursor: pointer;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img class="logo" src="https://upload.wikimedia.org/wikipedia/commons/4/44/BMW.svg" alt="BMW Logo">
+    <h1>BMW | Paras Chavan</h1>
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#models">Models</a>
+      <a href="#login">Login</a>
+      <a href="#owner">Owner</a>
+    </nav>
+  </header>
+
+  <!-- Home -->
+  <section class="hero" id="home">
+    <span class="bmw-text">Welcome to BMW</span>
+  </section>
+
+  <!-- Models -->
+  <section class="models" id="models"></section>
+
+  <!-- Login -->
+  <section class="login" id="login">
+    <div class="login-box">
+      <h2>Login</h2>
+      <input type="text" placeholder="Username or Email">
+      <input type="password" placeholder="Password">
+      <button>Login</button>
+    </div>
+  </section>
+
+  <!-- Owner -->
+  <section class="owner" id="owner">
+    <h2>Owner: Paras Chavan</h2>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    © 2025 BMW Website | Built by Paras Chavan
+    <br>
+    <a href="#">Facebook</a> | <a href="#">Instagram</a> | <a href="#">Twitter</a>
+  </footer>
+
+  <!-- Buy Now Modal -->
+  <div class="modal" id="buyModal">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeModal()">&times;</span>
+      <h2>Buy BMW</h2>
+      <input type="text" placeholder="Full Name">
+      <input type="email" placeholder="Email">
+      <input type="text" placeholder="Address">
+      <select>
+        <option>Payment Method</option>
+        <option>Credit Card</option>
+        <option>Debit Card</option>
+        <option>UPI</option>
+        <option>Net Banking</option>
+      </select>
+      <button>Confirm Purchase</button>
+    </div>
+  </div>
+
+  <script>
+    const mSeriesCars = [
+      // Petrol models
+      { name: "BMW M3", price: "$70,000", fuel: "Petrol", image: "https://amazingcarsanddrives.com/wp-content/uploads/2024/05/BMW-M3-.jpg" },
+      { name: "BMW M4", price: "$75,000", fuel: "Petrol", image: "https://media.hagerty.com/media/wp-content/uploads/2022/12/2022-BMW-M4-CSL-3.jpg" },
+      { name: "BMW M5", price: "$95,000", fuel: "Petrol", image: "https://tse2.mm.bing.net/th/id/OIP.fj4CuSKaYQh8LVGp6lFfMgHaD4?pid=Api&P=0&h=180" },
+      { name: "BMW M8", price: "$135,000", fuel: "Petrol", image: "https://www.topgear.com/sites/default/files/cars-car/carousel/2019/10/bmw_m8_coupe_fire_red_033.jpg" },
+      { name: "BMW X5 M", price: "$115,000", fuel: "Petrol", image: "https://cdn.bmwblog.com/wp-content/uploads/2023/05/BMW-X5-M-by-Manhart-1.jpg" },
+      { name: "BMW X6 M", price: "$120,000", fuel: "Petrol", image: "https://cdn.motor1.com/images/mgl/ZnM07K/s1/bmw-x6-m-competition-teste-br.jpg" },
+      
+      // Diesel models
+      { name: "BMW M340d", price: "$65,000", fuel: "Diesel", image: "https://tse3.mm.bing.net/th/id/OIP.-5R5Nr7ZKwEJG5j9-TXjpwHaE8?pid=Api&P=0&h=180" },
+      { name: "BMW X5 M50d", price: "$95,000", fuel: "Diesel", image: "https://www.autocar.co.uk/sites/autocar.co.uk/files/images/car-reviews/first-drives/legacy/bmw_x5_m50d_3.jpg" },
+      { name: "BMW X6 M50d", price: "$100,000", fuel: "Diesel", image: "https://www.automobile-magazine.fr/asset/cms/174406/config/123159/p90373770-highres.jpg" }
+    ];
+
+    const modelsContainer = document.querySelector(".models");
+    mSeriesCars.forEach(car => {
+      const card = document.createElement("div");
+      card.classList.add("card");
+      card.innerHTML = `
+        <img src="${car.image}" alt="${car.name}">
+        <h3>${car.name}</h3>
+        <p>Price: ${car.price}</p>
+        <p class="fuel">Fuel Type: ${car.fuel}</p>
+        <button class="buy-btn" onclick="openModal('${car.name}')">Buy Now</button>
+      `;
+      modelsContainer.appendChild(card);
+    });
+
+    const modal = document.getElementById("buyModal");
+
+    function openModal(carName) {
+      modal.style.display = "flex";
+      document.querySelector(".modal-content h2").innerText = `Buy ${carName}`;
+    }
+
+    function closeModal() {
+      modal.style.display = "none";
+    }
+
+    window.onclick = function(event) {
+      if (event.target == modal) {
+        closeModal();
+      }
+    }
+  </script>
+</body>
+</html>
